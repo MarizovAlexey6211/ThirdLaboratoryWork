@@ -46,3 +46,59 @@ private:
 		num_inhabitants = num;
 	}
 	std::list<edge_link> get_list() { return connect; }
+	using EdgeIterator = typename std::list<edge_link>::iterator;
+	void add_connect(const TVertex& src, const TVertex& dst, const TEdge& edge)
+	{
+		edge_link ins(src, dst, edge);
+		connect.insert(end_edge(), ins);
+	}
+	void erase_edge(EdgeIterator del)
+	{
+		connect.erase(del);
+	}
+
+	EdgeIterator find_edge(const TVertex& dst)
+	{
+		auto i = begin_edge();
+		auto e = end_edge();
+		while (i != e) {
+			if (i->_get_dst() == dst) return i;
+			++i;
+		}
+		return e;
+	}
+	EdgeIterator find_min_edge(const TVertex& src) 
+	{
+		auto i = begin_edge();
+		auto e = end_edge();
+		TEdge min = i->_get_edge();
+		auto min_edge = i;
+		while (i != e) {
+			if (i->_get_edge() < min)
+			{
+				min = i->_get_edge();
+				min_edge = i;
+			}
+			++i;
+		}
+		return min_edge;
+	}
+	EdgeIterator find_edge_and_dist(const TVertex& dst, const TEdge& need_dist)
+	{
+		auto i = begin_edge();
+		auto e = end_edge();
+		while (i != e) {
+			if (i->_get_dst() == dst && i->_get_edge() == need_dist) return i;
+			++i;
+		}
+		return e;
+	}
+	EdgeIterator begin_edge()
+	{
+		return connect.begin();
+	}
+	EdgeIterator end_edge()
+	{
+		return connect.end();
+	}
+};
