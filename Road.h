@@ -102,3 +102,16 @@ private:
 		return connect.end();
 	}
 };
+template < typename TVertex, typename TEdge, typename TVertexContainer = std::vector<locality<TVertex, TEdge>>>
+class road_network {
+	TVertexContainer _vertices;
+
+	void all_color_null() {
+		auto i = begin();
+		auto e = end();
+		while (i != e) {
+			i->edit_color(0);
+			++i;
+		}
+	}
+};
