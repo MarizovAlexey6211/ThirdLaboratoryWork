@@ -28,3 +28,21 @@ private:
 		void _edit_edge(const TEdge& length) { edge = length; }
 	};
 	std::list<edge_link> connect;
+	locality(TVertex name, size_t num_inhabitants) : name(name), num_inhabitants(num_inhabitants) {}
+	TVertex get_name() { return name; }
+	size_t get_num() { return num_inhabitants; }
+	int get_color() { return color; }
+	void edit_color(const int& new_color) { color = new_color; }
+	void edit_name(const TVertex& src) {
+		name = src;
+		auto i = begin_edge();
+		auto e = end_edge();
+		while (i != e) {
+			i->_edit_src(name);
+			++i;
+		}
+	}
+	void edit_num(const size_t& num) {
+		num_inhabitants = num;
+	}
+	std::list<edge_link> get_list() { return connect; }
