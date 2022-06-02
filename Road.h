@@ -114,4 +114,27 @@ class road_network {
 			++i;
 		}
 	}
+	void dfs_without(const TVertex& src)
+	{
+		auto i = find_v(src);
+		if (i == end()) {
+			throw std::logic_error("You are trying to change a non-existent edge");
+		}
+		static TVertex name = src;
+		std::cout << src << " ";
+		i->edit_color(1);
+		auto begin = i->begin_edge();
+		auto final = i->end_edge();
+		for (begin; begin != final; begin++)
+		{
+			auto dst_edge = begin->_get_dst();
+			auto dst_vert = find_v(begin->_get_dst());
+			if (dst_vert->get_color() != 1)
+			{
+				static int ind = 0;
+				++ind;
+				dfs_without(dst_edge);
+			}
+		}
+	}
 };
