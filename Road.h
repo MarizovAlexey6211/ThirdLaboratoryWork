@@ -230,4 +230,39 @@ public:
 		else
 			throw std::logic_error("You are trying to change a non-existent edge");
 	}
+	void erase_edge(const TVertex& src, const TVertex& dst, const TEdge& edge)
+	{
+		auto i = find_v(src);
+		if (i != end())
+		{
+			auto need = i->find_edge_and_dist(dst, edge);
+			if (need != i->end_edge())
+				i->erase_edge(need);
+			else
+				throw std::logic_error("There is no such final path");
+		}
+		else
+			throw std::logic_error("You are trying to change a non-existent edge");
+	}
+	void erase_vertex(const TVertex& src)
+	{
+		if (check_e_vertex(src) == false)
+			throw std::logic_error("You entered a non-existent locality");
+		auto i = begin();
+		auto e = end();
+		while (i != e) {
+			auto start_edge = i->begin_edge();
+			auto final_edge = i->end_edge();
+			while (start_edge != final_edge) {
+				auto copy = start_edge;
+				++start_edge;
+				if (copy->_get_src() == src || copy->_get_dst() == src) {
+					i->erase_edge(copy);
+				}
+			}
+			++i;
+		}
+		auto del_vertex = find_v(src);
+		_vertices.erase(del_vertex);
+	}
 };
