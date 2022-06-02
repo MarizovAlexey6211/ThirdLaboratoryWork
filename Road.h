@@ -184,4 +184,50 @@ public:
 		}
 		begin->add_connect(src, dst, edge);
 	}
+	void edit_vertex(const TVertex& old, const TVertex& neew) {
+		auto i = find_v(old);
+		if (i != end())
+		{
+			i->edit_name(neew);
+		}
+		else
+			throw std::logic_error("You are trying to change a non-existent vertex");
+	}
+	void edit_number(const TVertex& old, const size_t& neew) {
+		auto i = find_v(old);
+		if (i != end())
+		{
+			i->edit_num(neew);
+		}
+		else
+			throw std::logic_error("You are trying to change a non-existent vertex");
+	}
+	void edit_edge_distance(const TVertex& src, const TVertex& dst, const TEdge& edge)
+	{
+		auto i = find_v(src);
+		if (i != end())
+		{
+			auto need = i->find_edge(dst);//имеющееся ребро
+			if (need != i->end_edge())
+				need->_edit_edge(edge);//новое расстояние
+			else
+				throw std::logic_error("There is no such final path");
+		}
+		else
+			throw std::logic_error("You are trying to change a non-existent edge");
+	}
+	void edit_edge_dst(const TVertex& src, const TVertex& dst, const TVertex& new_dst)
+	{
+		auto i = find_v(src);
+		if (i != end())
+		{
+			auto need = i->find_edge(dst);
+			if (need != i->end_edge())
+				need->_edit_dst(new_dst);
+			else
+				throw std::logic_error("There is no such final path");
+		}
+		else
+			throw std::logic_error("You are trying to change a non-existent edge");
+	}
 };
