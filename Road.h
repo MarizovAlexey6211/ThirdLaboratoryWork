@@ -174,4 +174,14 @@ public:
 		if (key == true)return true;
 		else return false;
 	}
+	void add_edge(const TVertex& src, const TVertex& dst, const TEdge& edge) {
+		if (check_exist_vertexes(src, dst) == false)
+			throw std::logic_error("You entered a non-existent locality");
+		auto begin = _vertices.begin();
+		while (begin->get_name() != src)
+		{
+			++begin;
+		}
+		begin->add_connect(src, dst, edge);
+	}
 };
