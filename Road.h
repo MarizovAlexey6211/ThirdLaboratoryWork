@@ -145,4 +145,33 @@ public:
 		locality<TVertex, TEdge> ins_vertex(vertex, number);
 		_vertices.insert(_vertices.end(), ins_vertex);
 	}
+	bool check_exist_vertexes(const TVertex& src, const TVertex& dst)
+	{
+		bool start = false;
+		bool final = false;
+		auto begin = _vertices.begin();
+		auto end = _vertices.end();
+		while (begin != end) {
+			if (begin->get_name() == src)
+				start = true;
+			if (begin->get_name() == dst)
+				final = true;
+			++begin;
+		}
+		if (start == true && final == true)return true;
+		else return false;
+	}
+	bool check_e_vertex(const TVertex& src)
+	{
+		bool key = false;
+		auto begin = _vertices.begin();
+		auto end = _vertices.end();
+		while (begin != end) {
+			if (begin->get_name() == src)
+				key = true;
+			++begin;
+		}
+		if (key == true)return true;
+		else return false;
+	}
 };
