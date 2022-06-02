@@ -137,4 +137,12 @@ class road_network {
 			}
 		}
 	}
+public:
+	using VertexIterator = typename TVertexContainer::iterator;
+	void add_vertex(const TVertex& vertex, const size_t number) {
+		auto begin = _vertices.begin();
+		auto end = _vertices.end();
+		locality<TVertex, TEdge> ins_vertex(vertex, number);
+		_vertices.insert(_vertices.end(), ins_vertex);
+	}
 };
