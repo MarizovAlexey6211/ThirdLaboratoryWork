@@ -1,0 +1,2 @@
+C:\Users\Professional\source\repos\TLR\Debug\TLR.exe
+C:\Users\Professional\source\repos\TLR\Debug\TLR.pdb

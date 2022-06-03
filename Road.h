@@ -28,6 +28,7 @@ private:
 		void _edit_edge(const TEdge& length) { edge = length; }
 	};
 	std::list<edge_link> connect;
+public:
 	locality(TVertex name, size_t num_inhabitants) : name(name), num_inhabitants(num_inhabitants) {}
 	TVertex get_name() { return name; }
 	size_t get_num() { return num_inhabitants; }
@@ -318,4 +319,42 @@ std::pair<std::vector<std::string>, double> Dijkstra(road_network<std::string, d
 	road_network<std::string, double> way;
 	std::vector<std::string> p;
 	std::pair<std::vector<std::string>, double> rz;
+	if (g.check_exist_vertexes(src, dst) == false)
+	{
+		return std::make_pair(p, -1);
+	}
+	auto b = l.begin();
+	auto end = l.end();
+	for (b; b < end; b++)
+	{
+		way.add_vertex(b->get_name(), b->get_num());
+		way.add_edge(b->get_name(), b->get_name(), 0);
+		if (b->get_name() == src)
+		{
+			b->edit_num(0);
+		}
+		else
+			b->edit_num(LLONG_MAX);
+	}
+	auto size = g.size();
+	for (size_t i = 0; i < size; ++i)
+	{
+		auto v = l.min_elem_di();
+		if (l.find_v(v->get_name())->get_num() == LLONG_MAX) {
+			break;
+		}
+		v->edit_color(2);
+		auto begin_v = v->begin_edge();
+		auto end_v = v->end_edge();
+		while (begin_v != end_v) {
+			auto link = *begin_v;
+			auto q = l.find_v(link._get_dst()); 
+			auto w = link._get_edge(); 
+			if (v->get_num() + w < q->get_num()) {
+				q->edit_num(v->get_num() + w);
+				way.find_v(q->get_name())->begin_edge()->_edit_dst(v->get_name());
+			}
+			++begin_v;
+		}
+	}
 }

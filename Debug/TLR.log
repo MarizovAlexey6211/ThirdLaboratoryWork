@@ -1,0 +1,10 @@
+﻿  Source.cpp
+C:\Users\Professional\source\repos\TLR\Road.h(337,25): warning C4305: аргумент: усечение из "__int64" в "const size_t"
+C:\Users\Professional\source\repos\TLR\Road.h(337,16): warning C4309: аргумент: усечение константного значения
+C:\Users\Professional\source\repos\TLR\Road.h(354,30): warning C4244: аргумент: преобразование "TEdge" в "const size_t", возможна потеря данных
+          with
+          [
+              TEdge=double
+          ]
+C:\Users\Professional\source\repos\TLR\Road.h(360): warning C4715: Dijkstra: значение возвращается не при всех путях выполнения
+  TLR.vcxproj -> C:\Users\Professional\source\repos\TLR\Debug\TLR.exe
