@@ -292,5 +292,22 @@ public:
 		dfs_without(src);
 		all_color_null();
 	}
+	VertexIterator min_elem_di()
+	{
+		auto begin = _vertices.begin();
+		auto end = _vertices.end();
+		size_t min = SIZE_MAX;
+		auto min_vert = begin;
+		while (begin != end)
+		{
+			if (begin->get_num() < min && begin->get_color() != 2)
+			{
+				min = begin->get_num();
+				min_vert = begin;
+			}
+			++begin;
+		}
+		return min_vert;
+	}
 
 };
