@@ -265,4 +265,32 @@ public:
 		auto del_vertex = find_v(src);
 		_vertices.erase(del_vertex);
 	}
+	size_t size() const {
+		return _vertices.size();
+	}
+	VertexIterator find_v(const TVertex& src) {
+		auto begin = _vertices.begin();
+		auto end = _vertices.end();
+		while (begin != end) {
+			if (begin->get_name() == src) return begin;
+			++begin;
+		}
+		return end;
+	}
+
+	VertexIterator begin() {
+		return _vertices.begin();
+	}
+
+	VertexIterator end() {
+		return _vertices.end();
+	}
+
+
+	void dfs(const TVertex& src)
+	{
+		dfs_without(src);
+		all_color_null();
+	}
+
 };
