@@ -311,3 +311,11 @@ public:
 	}
 
 };
+
+std::pair<std::vector<std::string>, double> Dijkstra(road_network<std::string, double>& g, const std::string& src, const std::string& dst)
+{
+	road_network<std::string, double> l = g;
+	road_network<std::string, double> way;
+	std::vector<std::string> p;
+	std::pair<std::vector<std::string>, double> rz;
+}
