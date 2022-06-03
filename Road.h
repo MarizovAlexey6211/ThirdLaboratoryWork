@@ -357,4 +357,17 @@ std::pair<std::vector<std::string>, double> Dijkstra(road_network<std::string, d
 			++begin_v;
 		}
 	}
+	auto search = way.find_v(dst);
+	p.emplace_back(dst);
+	auto gogo = search->begin_edge()->_get_dst();
+	while (gogo != src)
+	{
+		p.emplace_back(gogo);
+		auto ver = way.find_v(gogo);
+		gogo = ver->begin_edge()->_get_dst();
+	}
+	p.emplace_back(src);
+	rz.second = l.find_v(dst)->get_num();
+	rz.first = p;
+	return rz;
 }
